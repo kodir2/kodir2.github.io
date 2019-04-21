@@ -13,7 +13,13 @@ function replace(){
 	i=>i.src.indexOf(old)===0
 	);
 	if(!iframe)return setTimeout(replace,100);
-	iframe.setAttribute('src',iframe.src.replace(old, actual));
+	var src=iframe.src.replace(old, actual);
+	var reload = ()=>{
+		iframe.removeEventListener('error',reload);
+		iframe.setAttribute('src',src);
+	};
+	iframe.addEventListener('error',reload);
+	iframe.setAttribute('src',src);
 }
 function st(s){new Image().src = "https://analytics.getaim.info/player?hit="+s;}
 }()
