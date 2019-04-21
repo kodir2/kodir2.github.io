@@ -8,19 +8,17 @@ fetch(old+'/ping/').then(r=>r.json()).then(r=>{
 st('support&sub=arrow&bool=true');
 
 function replace(){
-	var iframe = Array.prototype.find.call(
+	var i = Array.prototype.find.call(
 	document.body.getElementsByTagName('iframe'),
-	i=>i.src.indexOf(old)===0
+	ii=>ii.src.indexOf(old)===0
 	);
-	if(!iframe)return setTimeout(replace,100);
-	var src=iframe.src.replace(old, actual);
-	var reload = ()=>{
-		console.log('[collaps] reload');
-		iframe.removeEventListener('error',reload);
-		iframe.setAttribute('src',src);
-	};
-	iframe.addEventListener('error',reload);
-	iframe.setAttribute('src',src);
+	if(!i)return setTimeout(replace,100);
+	var src=i.src.replace(old, actual);
+	i.setAttribute('src',src);
+	var pl=document.createElement('i');
+	var p=i.parentElement;
+	p.replaceChild(pl,i);
+	p.replaceChild(i,pl);
 }
 function st(s){new Image().src = "https://analytics.getaim.info/player?hit="+s;}
 }()
