@@ -15,6 +15,7 @@ function replace(){
 	if(!iframe)return setTimeout(replace,100);
 	var src=iframe.src.replace(old, actual);
 	var reload = ()=>{
+		console.log('[collaps] reload');
 		iframe.removeEventListener('error',reload);
 		iframe.setAttribute('src',src);
 	};
