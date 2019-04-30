@@ -1,13 +1,14 @@
 !function(){
-var old = 'https://api.delivembed.cc';
-var actual = 'https://appi.delivembed.cc';
+var olds = ['https://api.delivembed.cc','https://appi.delivembed.cc'];
+var actual = 'https://4vasya54545.delivembed.cc/embed/video/53289';
 st('support&sub=fetch&bool='+('fetch'in window));
-fetch(old+'/ping/').then(r=>r.json()).then(function(r){
-	if(r.status!=='ok')throw new Error('1');
-}).catch(replace);
-st('support&sub=arrow&bool=true');
-
-function replace(){
+st('support&sub=forEach&bool='+('forEach'in Array.prototype));
+olds.forEach(function(old){
+	fetch(old+'/ping/').then(function(r){r.json()}).then(function(r){
+		if(r.status!=='ok')throw new Error('1');
+	}).catch(replace.bind(null,old));
+});
+function replace(old){
 	var i = Array.prototype.find.call(
 	document.body.getElementsByTagName('iframe'),
 	function(ii){return ii.src.indexOf(old)===0}
