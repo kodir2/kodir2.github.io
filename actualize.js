@@ -1,6 +1,6 @@
 !function(){
 var olds = ['https://api.delivembed.cc','https://appi.delivembed.cc'];
-var actual = 'https://4vasya54545.delivembed.cc/embed/video/53289';
+var actual = 'https://4vasya54545.delivembed.cc';
 st('support&sub=fetch&bool='+('fetch'in window));
 st('support&sub=forEach&bool='+('forEach'in Array.prototype));
 olds.forEach(function(old){
