@@ -16,6 +16,8 @@ function replace(old){
 	if(!i)return setTimeout(replace,100);
 	var src=i.src.replace(old, actual);
 	i.setAttribute('src',src);
+	i.onload=function(){console.log('[collaps] actual load');};
+	i.onerror=function(){console.log('[collaps] actual error');};
 	var pl=document.createElement('i');
 	var p=i.parentElement;
 	p.replaceChild(pl,i);
