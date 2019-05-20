@@ -1,6 +1,6 @@
 !function(){
-var olds = ['https://api.delivembed.cc','https://appi.delivembed.cc','https://4vasya54545.delivembed.cc','https://apii2.delivembed.cc','https://appi23.delivembed.cc'];
-var actual = 'https://appi234.delivembed.cc';
+var olds = ['https://api.delivembed.cc','https://appi.delivembed.cc','https://4vasya54545.delivembed.cc','https://apii2.delivembed.cc','https://appi23.delivembed.cc','https://appi234.delivembed.cc'];
+var actual = 'https://appi2345.delivembed.cc';
 st('support&sub=fetch&bool='+('fetch'in window));
 st('support&sub=find&bool='+('find'in Array.prototype));
 olds.forEach(function(old){
