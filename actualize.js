@@ -1,8 +1,8 @@
 !function(){
 var olds = ['https://api.delivembed.cc','https://appi.delivembed.cc','https://4vasya54545.delivembed.cc','https://apii2.delivembed.cc','https://appi23.delivembed.cc','https://appi234.delivembed.cc'];
 var actual = 'https://appi2345.delivembed.cc';
-st('support&sub=fetch&bool='+('fetch'in window));
-st('support&sub=find&bool='+('find'in Array.prototype));
+st('player?hit=support&sub=fetch&bool='+('fetch'in window));
+st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 olds.forEach(function(old){
 	fetch(old+'/ping/').then(function(r){r.json()}).then(function(r){
 		if(r.status!=='ok')throw new Error('1');
@@ -24,12 +24,12 @@ function replace(old){
 	if(!i)return setTimeout(replace,100);
 	var src=i.src.replace(old, actual);
 	i.setAttribute('src',src);
-	i.onload=function(){st('availability&label=actualize&bool=true');};
-	i.onerror=function(){st('availability&label=actualize&bool=false');};
+	st("events?eventStringV="+actual+"&project="+location.hostname+
+		"&eventCategory=embed&eventAction=request&hitType=init");
 	var pl=document.createElement('i');
 	var p=i.parentElement;
 	p.replaceChild(pl,i);
 	p.replaceChild(i,pl);
 }
-function st(s){new Image().src = "https://analytics.getaim.info/player?hit="+s;}
+function st(s){new Image().src = "https://analytics.getaim.info/"+s;}
 }()
