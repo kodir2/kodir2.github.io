@@ -12,7 +12,7 @@ olds.forEach(function(old){
 	}).catch(replace.bind(null,old));
 });
 var s=document.createElement('style');
-s.innerHTML='.collaps-fake-fullscreen{position:fixed !important;width:100% !important;height:100% !important;left:0;top:0;z-index:999}';
+s.innerHTML='.collaps-fake-fullscreen{position:fixed !important;width:100% !important;height:100% !important;left:0;top:0;z-index:1111}';
 document.head.appendChild(s);
 addEventListener('message',function(e){
 	if(e.origin!==actual||e.data.event!=='fakeFullScreen')return;
