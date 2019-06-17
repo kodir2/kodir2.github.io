@@ -1,5 +1,4 @@
 !function(){
-replace();
 var actual = 'https://api'+Date.now()+'.delivembed.cc'
 ,delay=200
 ,ok=[]
@@ -11,6 +10,7 @@ addEventListener('message',function(e){
 	var ifr = findFrame(function(i){return i.src===e.data.src});
 	if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 });
+replace();
 function findFrame(fn){
 	return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
 }
