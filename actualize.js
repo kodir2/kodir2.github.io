@@ -17,7 +17,7 @@ function findFrame(fn){
 function replace(){
 	setTimeout(replace,delay++);
 	var old,re=/https?:\/\/app?ii?\d*.delivembed.cc/
-	,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&ok.indexOf(i.src)===-1&&ii.src.match(re)});
+	,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&ok.indexOf(ii.src)===-1&&ii.src.match(re)});
 	if(i)fetch(old[0]+'/ping/').then(function(r){return r.json()}).then(function(r){
 		if(r.status!=='ok')throw new Error('1');
 		ok.push(i.src);
