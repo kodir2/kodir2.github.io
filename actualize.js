@@ -1,9 +1,8 @@
 !function(){
 replace();
-var actual = 'https://api'+Date.now()+'.delivembed.cc';
-st('player?hit=support&sub=fetch&bool='+('fetch'in window));
-st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
-var s=document.createElement('style');
+var actual = 'https://api'+Date.now()+'.delivembed.cc'
+,delay=200
+,s=document.createElement('style');
 s.innerHTML='.collaps-fake-fullscreen{position:fixed !important;width:100% !important;height:100% !important;left:0;top:0;z-index:1111}';
 document.head.appendChild(s);
 addEventListener('message',function(e){
@@ -15,7 +14,7 @@ function findFrame(fn){
 	return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
 }
 function replace(){
-	setTimeout(replace,100);
+	setTimeout(replace,delay++);
 	var old,re=/https?:\/\/app?ii?\d*.delivembed.cc/
 	,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&ii.src.match(re)});
 	if(i)fetch(old[0]+'/ping/').then(function(r){r.json()}).then(function(r){
@@ -32,4 +31,6 @@ function replace(){
 	});
 }
 function st(s){new Image().src = "https://analytics.getaim.info/"+s;}
+st('player?hit=support&sub=fetch&bool='+('fetch'in window));
+st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 }()
