@@ -10,6 +10,8 @@ addEventListener('message',function(e){
 	var ifr = findFrame(function(i){return i.src===e.data.src});
 	if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 });
+st('player?hit=support&sub=fetch&bool='+('fetch'in window));
+st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 replace();
 function findFrame(fn){
 	return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
@@ -34,6 +36,4 @@ function replace(){
 	});
 }
 function st(s){new Image().src = "https://analytics.getaim.info/"+s;}
-st('player?hit=support&sub=fetch&bool='+('fetch'in window));
-st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 }()
