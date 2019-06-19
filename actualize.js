@@ -14,7 +14,7 @@ st('player?hit=support&sub=fetch&bool='+('fetch'in window));
 st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 replace();
 function findFrame(fn){
-	return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
+	if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
 }
 function replace(){
 	setTimeout(replace,delay++);
