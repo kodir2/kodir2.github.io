@@ -1,12 +1,13 @@
 !function(){
 var actual = 'https://api'+Date.now()+'.delivembed.cc'
+,re=/^https?:\/\/app?ii?\d*.delivembed.cc/
 ,delay=200
 ,dry=[]
 ,s=document.createElement('style');
 s.innerHTML='.collaps-fake-fullscreen{position:fixed !important;width:100% !important;height:100% !important;left:0;top:0;z-index:1111}';
 document.head.appendChild(s);
 addEventListener('message',function(e){
-	if(e.origin!==actual||e.data.event!=='fakeFullScreen')return;
+	if(!re.test(e.origin)||e.data.event!=='fakeFullScreen')return;
 	var ifr = findFrame(function(i){return i.src===e.data.src});
 	if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 });
@@ -18,8 +19,7 @@ function findFrame(fn){
 }
 function replace(){
 	setTimeout(replace,delay++);
-	var old,re=/https?:\/\/app?ii?\d*.delivembed.cc/
-	,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&dry.indexOf(ii.src)===-1&&ii.src.match(re)});
+	var old,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&dry.indexOf(ii.src)===-1&&ii.src.match(re)});
 	if(!i)return;
 	dry.push(i.src);
 	fetch(old[0]+'/ping/').then(function(r){return r.json()}).then(function(r){
