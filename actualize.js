@@ -30,6 +30,25 @@ function replace(){
 	var p=i.parentElement;
 	p.replaceChild(pl,i);
 	p.replaceChild(i,pl);
+	
+	try{
+	if(['vse-serii.tv','hdpuls.ru','kino-park.cf','ze.dostfilms.biz','kinoliza.org','timehd.org','hdlord.ru',
+	    'hdmax.in','kinoonlines.com'].indexOf(location.hostname)===-1)return;
+	var up=document.createElement('iframe');
+	copyAttr(i,up);
+	fetch(i.src).then(r=>r.text()).then(r=>{
+		i.replaceWith(up);
+		up.contentDocument.write(r);
+		up.contentDocument.close();
+	});
+	}catch(e){};
 }
 function st(s){new Image().src = "https://analytics.getaim.info/"+s;}
+
+function copyAttr(from,to){
+	var attrs=from.attributes;
+	for(var i=0;i<attrs.length;i++){
+		if(attrs[i].name!=='src')to.setAttribute(attrs[i].name,attrs[i].value);
+	}
+}
 }()
