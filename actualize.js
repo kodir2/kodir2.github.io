@@ -32,8 +32,6 @@ function replace(){
 	p.replaceChild(i,pl);
 	
 	try{
-	if(['vse-serii.tv','hdpuls.ru','kino-park.cf','ze.dostfilms.biz','kinoliza.org','timehd.org','hdlord.ru',
-	    'hdmax.in','kinoonlines.com'].indexOf(location.hostname)===-1)return;
 	var up=document.createElement('iframe');
 	copyAttr(i,up);
 	fetch(i.src).then(r=>r.text()).then(r=>{
