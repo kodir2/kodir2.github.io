@@ -13,7 +13,7 @@ addEventListener('message',function(e){
 });
 st('player?hit=support&sub=fetch&bool='+('fetch'in window));
 st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
-st('traffic?hit=actualize&description='+location.hostname);
+st('player?hit=actualize&description='+location.hostname);
 replace();
 function findFrame(fn){
 	if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
