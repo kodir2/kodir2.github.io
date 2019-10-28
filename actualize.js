@@ -35,8 +35,10 @@ function replace(){
 	try{
 	var up=document.createElement('iframe');
 	copyAttr(i,up);
+	up.setAttribute('allow', 'autoplay *; fullsreen');
+        up.allow = 'autoplay *; fullsreen';
 	fetch(i.src).then(r=>r.text()).then(r=>{
-		i.replaceWith(up);
+		p.replaceChild(up,i);
 		up.contentDocument.write(r);
 		up.contentDocument.close();
 	});
