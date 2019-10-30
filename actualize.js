@@ -23,26 +23,16 @@ function replace(){
 	var old,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&dry.indexOf(ii.src)===-1&&ii.src.match(re)});
 	if(!i)return;
 	dry.push(i.src);
-	var src=i.src.replace(old[0], actual);
-	i.setAttribute('src',src);
-	st("events?eventStringV="+actual+"&project="+location.hostname+
-		"&eventCategory=embed&eventAction=request&hitType=init");
-	var pl=document.createElement('i');
-	var p=i.parentElement;
-	p.replaceChild(pl,i);
-	p.replaceChild(i,pl);
-	
-	try{
-	var up=document.createElement('iframe');
-	copyAttr(i,up);
-	up.setAttribute('allow', 'autoplay *; fullsreen');
-        up.allow = 'autoplay *; fullsreen';
-	fetch(i.src).then(r=>r.text()).then(r=>{
-		p.replaceChild(up,i);
+	get(i.src.replace(old[0], actual), function(r){
+		st("events?eventStringV="+actual+"&project="+location.hostname+"&eventCategory=embed&eventAction=request&hitType=init");
+		var up=document.createElement('iframe');
+		copyAttr(i,up);
+		up.setAttribute('allow', 'autoplay *; fullsreen');
+		up.allow = 'autoplay *; fullsreen';
+		i.parentElement.replaceChild(up,i);
 		up.contentDocument.write(r);
 		up.contentDocument.close();
 	});
-	}catch(e){};
 }
 function st(s){new Image().src = "https://analytics.getaim.info/"+s;}
 
@@ -51,5 +41,13 @@ function copyAttr(from,to){
 	for(var i=0;i<attrs.length;i++){
 		if(attrs[i].name!=='src')to.setAttribute(attrs[i].name,attrs[i].value);
 	}
+}
+function get(url, cb) {
+	var xhr = new XMLHttpRequest;
+	xhr.open('GET', url);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status === 200) cb(xhr.response);
+	};
+	xhr.send();
 }
 }()
