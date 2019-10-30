@@ -1,6 +1,6 @@
 !function(){
-var actual = 'https://api'+Date.now()+'.delivembed.cc'
-,re=/^https?:\/\/app?ii?\d*.delivembed.cc/
+var actual = 'https://api'+Date.now()+'.buildplayer.com'
+,re=/^https?:\/\/app?ii?\d*\.(delivembed\.cc|buildplayer\.com)/
 ,delay=200
 ,dry=[]
 ,s=document.createElement('style');
