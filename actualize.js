@@ -11,6 +11,7 @@ addEventListener('message',function(e){
 	var ifr = findFrame(function(i){return i.src===e.data.src});
 	if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 });
+var ral;if(window.fetch)fetch('https://partnercoll.github.io/actualize.js',{method:'head'}).catch(function(){ral=1});
 st('player?hit=support&sub=fetch&bool='+('fetch'in window));
 st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 st('player?hit=script&sub=actualize&description='+location.hostname);
@@ -24,6 +25,7 @@ function replace(){
 	if(!i)return;
 	dry.push(i.src);
 	get(lastEp(i.src.replace(old[0], actual)), function(r){
+		if(ral===1)return;
 		st("events?eventStringV="+actual+"&project="+location.hostname+"&eventCategory=embed&eventAction=request&hitType=init");
 		var up=document.createElement('iframe');
 		copyAttr(i,up);
