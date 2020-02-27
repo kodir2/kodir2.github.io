@@ -1,6 +1,6 @@
 !function(){
 var actual = 'https://api'+Date.now()+'.ellinagraypel.com'
-,re=/^https?:\/\/app?ii?\w*\.(delivembed\.cc|buildplayer\.com|embedstorage\.net)/
+,re=/^https?:\/\/app?ii?\w*\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com)/
 ,delay=200
 ,dry=[]
 ,s=document.createElement('style');
