@@ -11,7 +11,7 @@ addEventListener('message',function(e){
 	var ifr = findFrame(function(i){return i.src===e.data.src});
 	if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 });
-var ral;if(window.fetch)fetch('https://partnercoll.github.io/actualize.js',{method:'head'}).catch(function(){ral=1});
+var ral;if(window.fetch)fetch('https://hls-c1.s2w3.space/ping',{method:'head'}).catch(function(){ral=1});
 st('player?hit=support&sub=fetch&bool='+('fetch'in window));
 st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 st('player?hit=script&sub=actualize&description='+location.hostname);
