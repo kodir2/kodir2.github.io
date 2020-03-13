@@ -1,7 +1,7 @@
 !function(){
 if(window['__actualize.js'])return;window['__actualize.js']=1;
 var actual = 'https://api'+Date.now()+'.ellinagraypel.com'
-,re=/^https?:\/\/app?ii?\w*\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com)/
+,re=/^https?:\/\/app?ii?\w*\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net)/
 ,delay=200
 ,dry=[]
 ,s=document.createElement('style');
