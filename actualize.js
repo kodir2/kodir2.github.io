@@ -42,7 +42,7 @@
 		};
 		if (!MS && navigator.serviceWorker) {
 			var root = 'https://api.' + old[1];
-			fetch(root + '/ping/').then(function () {
+			head(root + '/ping/').then(function () {
 				i.src = i.src.replace(old[0], root);
 				dry = [];
 				ignore.push(old[1]);
