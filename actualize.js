@@ -40,7 +40,7 @@
 				dry=[];
 			})
 		};
-		if (!MS && navigator.serviceWorker) {
+		if (~navigator.userAgent.indexOf('iPhone')|| !MS && navigator.serviceWorker) {
 			var root = 'https://api.' + old[1];
 			head(root + '/ping/').then(function () {
 				i.src = i.src.replace(old[0], root);
