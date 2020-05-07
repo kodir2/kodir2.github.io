@@ -1,10 +1,10 @@
 !function(){
 	if(window['__actualize.js'])return;window['__actualize.js']=1;
 	var actual = 'https://api'+Date.now()+'.ellinagraypel.com'
+		,ignore,last = 'https://api.multikland.net'
 		,re=/^https?:\/\/app?ii?\w*\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net)/
 		,delay=200
 		,dry=[]
-		,ignore=[]
 		,MS = window.MediaSource || window.WebKitMediaSource
 		,s=document.createElement('style');
 	s.innerHTML='.collaps-fake-fullscreen{position:fixed !important;width:100% !important;height:100% !important;left:0;top:0;z-index:1111}';
@@ -25,7 +25,7 @@
 	function replace(){
 		setTimeout(replace,delay++);
 		var old,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&dry.indexOf(ii.src)===-1&&ii.src.match(re)});
-		if (!i || old[0].indexOf('https://api.') == 0 && ~ignore.indexOf(old[1])) return;
+		if (!i || old[0]==ignore) return;
 		dry.push(i.src);
 		var f=function(){
 			get(lastEp(i.src.replace(old[0], actual)), function(r){
@@ -41,11 +41,10 @@
 			})
 		};
 		if (~navigator.userAgent.indexOf('iPhone')|| !MS && navigator.serviceWorker) {
-			var root = 'https://api.' + old[1];
-			head(root + '/ping/').then(function () {
-				i.src = i.src.replace(old[0], root);
+			head(last + '/ping/').then(function () {
+				i.src = i.src.replace(old[0], last);
 				dry = [];
-				ignore.push(old[1]);
+				ignore=last;
 			}).catch(f);
 		} else f();
 	}
