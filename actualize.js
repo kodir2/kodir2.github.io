@@ -40,7 +40,7 @@
 				dry=[];
 			})
 		};
-		if (~navigator.userAgent.indexOf('iPhone')|| !MS && navigator.serviceWorker) {
+		if (~navigator.userAgent.indexOf('iPhone')||(!MS && (navigator.serviceWorker || location.protocol=='http:'))) {
 			head(last + '/ping/').then(function () {
 				i.src = i.src.replace(old[0], last);
 				dry = [];
