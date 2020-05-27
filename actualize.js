@@ -28,7 +28,7 @@
 		if (!i || old[0]==ignore) return;
 		dry.push(i.src);
 		var f=function(){
-			get(lastEp(i.src.replace(old[0], actual)), function(r){
+			get(i.src.replace(old[0], actual), function(r){
 				if(ral===1)return;
 				var up=document.createElement('iframe');
 				copyAttr(i,up);
@@ -66,19 +66,5 @@
 	}
 	function head(u) {
 		return fetch(u,{method:'head'});
-	}
-	function lastEp(u){
-		if(!window.URL||!window.localStorage)return u;
-		var url=new URL(u),
-			p=url.searchParams;
-		if(p.has('episode'))return u;
-		var f=url.pathname.split('/').slice(-1)[0];
-		if(+f!=f)return u;
-		var se=(localStorage.getItem('vp'+f)||'').split(':'),
-			s=se[0],e=se[1];
-		if(+s!=s||+e!=e|| (p.has('season')&&p.get('season')&&p.get('season')!=s) )return u;
-		p.set('season',s);
-		p.set('episode',e);
-		return url.href;
 	}
 }()
