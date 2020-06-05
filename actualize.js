@@ -15,7 +15,7 @@
 		if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 	});
 	var ral;if(window.fetch)head('https://hls-c1.s2w3.space/ping').catch(function(){ral=1});
-	st('player?hit=support&sub=fetch&bool='+('fetch'in window));
+	st('player?hit=support&sub=wasm&bool='+('WebAssembly'in window));
 	st('player?hit=support&sub=find&bool='+('find'in Array.prototype));
 	st('player?hit=script&sub=actualize&description='+location.hostname);
 	replace();
