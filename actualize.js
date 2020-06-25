@@ -1,8 +1,8 @@
 !function(){
 	if(window['__actualize.js'])return;window['__actualize.js']=1;
-	var actual = 'https://api'+Date.now()+'.kinogram.best'
-		,ignore,last = 'https://api.multikland.net'
-		,re=/^https?:\/\/app?ii?\w*\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net)/
+	var actual = "https://api.kinogram.best"
+		,ignore,last = 'https://api.placehere.link'
+		,re=/^https?:\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com)/
 		,delay=200
 		,dry=[]
 		,MS = window.MediaSource || window.WebKitMediaSource
@@ -14,8 +14,8 @@
 		var ifr = findFrame(function(i){return i.src===e.data.src});
 		if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 	});
-	var ral;if(window.fetch)head('https://hls-c1.s2w3.space/ping').catch(function(){ral=1});
-	new Image().src = "https://stats.embedcdn.cc/player?hit=script&sub=actualize&host=" + location.hostname;
+	var ral;if(window.fetch)head('https://hls-c1.streamvid.club/ping').catch(function(){ral=1});
+	new Image().src = "https://stats.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
 	replace();
 	function findFrame(fn){
 		if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
