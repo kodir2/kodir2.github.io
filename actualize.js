@@ -5,7 +5,7 @@
 		,re=/^https?:\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com)/
 		,delay=200
 		,dry=[]
-		,MS = window.MediaSource || window.WebKitMediaSource
+		,MS = window.MediaSource || window['WebKitMediaSource']
 		,s=document.createElement('style');
 	s.innerHTML='.collaps-fake-fullscreen{position:fixed !important;width:100% !important;height:100% !important;left:0;top:0;z-index:1111}';
 	document.head.appendChild(s);
@@ -30,8 +30,8 @@
 				if(ral===1)return;
 				var up=document.createElement('iframe');
 				copyAttr(i,up);
-				up.setAttribute('allow', 'autoplay *; fullsreen');
-				up.allow = 'autoplay *; fullsreen';
+				up.setAttribute('allow', 'autoplay *; fullscreen');
+				up.allow = 'autoplay *; fullscreen';
 				i.parentElement.replaceChild(up,i);
 				up.contentDocument.write(r);
 				up.contentDocument.close();
