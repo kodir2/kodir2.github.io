@@ -49,7 +49,8 @@
 	function copyAttr(from,to){
 		var attrs=from.attributes;
 		for(var i=0;i<attrs.length;i++){
-			if(attrs[i].name!=='src')to.setAttribute(attrs[i].name,attrs[i].value);
+			if(attrs[i].name!=='src'&&/^[\w\-]+$/.test(attrs[i].name))
+				to.setAttribute(attrs[i].name,attrs[i].value);
 		}
 	}
 	function get(url, cb) {
