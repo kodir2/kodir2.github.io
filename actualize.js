@@ -26,16 +26,15 @@
 		if (!i || old[0]==ignore) return;
 		dry.push(i.src);
 		var f=function(){
-			get(i.src.replace(old[0], actual), function(r){
+			var url = i.src.replace(old[0], actual);
+			get(url, function(r){
 				if(ral===1)return;
-				var up=document.createElement('iframe');
-				copyAttr(i,up);
-				up.setAttribute('allow', 'autoplay *; fullscreen');
-				up.allow = 'autoplay *; fullscreen';
-				i.parentElement.replaceChild(up,i);
-				up.contentDocument.write(r);
-				up.contentDocument.close();
+				var up=update(i,r);
 				dry=[];
+				addEventListener('message',function(e){
+					if(e.origin==location.origin&&e.data=='reActualizeMe'&&up.contentWindow==e.source)
+						get(url,function(r){up=update(up,r);})
+				})
 			})
 		};
 		if (~navigator.userAgent.indexOf('iPhone')||(!MS && (navigator.serviceWorker || location.protocol=='http:'))) {
@@ -45,6 +44,16 @@
 				ignore=last;
 			}).catch(f);
 		} else f();
+	}
+	function update(old,w){
+		var up=document.createElement('iframe');
+		copyAttr(old,up);
+		up.setAttribute('allow', 'autoplay *; fullscreen');
+		up.allow = 'autoplay *; fullscreen';
+		old.parentElement.replaceChild(up,old);
+		up.contentDocument.write(w);
+		up.contentDocument.close();
+		return up;
 	}
 	function copyAttr(from,to){
 		var attrs=from.attributes;
