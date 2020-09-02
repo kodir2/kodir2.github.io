@@ -32,6 +32,10 @@
 				if(ral===1)return;
 				var up=update(i,r);
 				dry=[];
+				if(window.URL){
+					url=new URL(url);
+					url.searchParams.delete('episode');
+				}
 				addEventListener('message',function(e){
 					if(e.origin==location.origin&&e.data=='reActualizeMe'&&up.contentWindow==e.source)
 						get(url,function(r){up=update(up,r);})
