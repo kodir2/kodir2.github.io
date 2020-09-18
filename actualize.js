@@ -24,7 +24,7 @@
 	function replace(){
 		setTimeout(replace,delay++);
 		var old,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&dry.indexOf(ii.src)===-1&&ii.src.match(re)});
-		if (!i || old[0]==ignore) return;
+		if (!i ||i.offsetWidth===0||old[0]==ignore) return;
 		dry.push(i.src);
 		var f=function(){
 			var url = i.src.replace(old[0], actual);
