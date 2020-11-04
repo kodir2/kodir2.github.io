@@ -15,7 +15,7 @@
 		var ifr = findFrame(function(i){return i.src===e.data.src});
 		if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
 	});
-	var ral;if(window.fetch)head('https://hls-c1.streamvid.club/ping').catch(function(){ral=1});
+	var ral;if(window.fetch&&!ios)head('https://hls-c1.streamvid.club/ping').catch(function(){ral=1});
 	new Image().src = "https://stats.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
 	replace();
 	function findFrame(fn){
