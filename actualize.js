@@ -6,15 +6,7 @@
 		,delay=200
 		,dry=[]
 		,MS = window.MediaSource || window['WebKitMediaSource']
-		,ios=~navigator.userAgent.indexOf('iPhone')
-		,s=document.createElement('style');
-	s.innerHTML='.collaps-fake-fullscreen{position:fixed !important;width:100% !important;height:100% !important;left:0;top:0;z-index:1111}';
-	document.head.appendChild(s);
-	addEventListener('message',function(e){
-		if(!re.test(e.origin)||e.data.event!=='fakeFullScreen')return;
-		var ifr = findFrame(function(i){return i.src===e.data.src});
-		if(ifr)ifr.classList.toggle('collaps-fake-fullscreen');
-	});
+		,ios=~navigator.userAgent.indexOf('iPhone');
 	var ral;if(window.fetch&&!ios)head('https://hls-c1.streamvid.club/ping').catch(function(){ral=1});
 	new Image().src = "https://stats.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
 	replace();
