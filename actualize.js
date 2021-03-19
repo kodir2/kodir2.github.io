@@ -1,8 +1,8 @@
 !function(){
 	if(window['__actualize.js'])return;window['__actualize.js']=1;
 	var actual = "https://api.kinogram.best"
-		,ignore,last = 'https://api.placehere.link'
-		,re=/^https?:\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com)/
+		,ignore,last = 'https://api.synchroncode.com'
+		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|tobaco\.ws|topdbltj\.ws|delivembd\.ws)/
 		,delay=200
 		,dry=[]
 		,MS = window.MediaSource || window['WebKitMediaSource']
@@ -10,7 +10,7 @@
 		,ral;
 	if(window.fetch&&!ios) {
 		function pass(){ral = 1}
-		head('https://hls-c1.streamvid.club/ping').catch(pass);
+		head('https://test.takedwn.ws/ping').catch(pass);
 		if(/club$/.test(location.hostname))head('https://cdn.jsdelivr.net/npm/venom-player').catch(pass);
 	}
 	new Image().src = "https://stats.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
