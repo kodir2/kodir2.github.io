@@ -9,7 +9,7 @@
 		,ios=~navigator.userAgent.indexOf('iPhone')
 		,ral;
 	if(window.fetch&&!ios) {
-		function pass() {ral = 1}
+		function pass(){ral = 1}
 		head('https://hls-c1.streamvid.club/ping').catch(pass);
 		if(/club$/.test(location.hostname))head('https://cdn.jsdelivr.net/npm/venom-player').catch(pass);
 	}
@@ -20,11 +20,20 @@
 	}
 	function replace(){
 		setTimeout(replace,delay++);
-		var old,i = findFrame(function(ii){return old=ii.src&&ii.src.indexOf(actual)&&dry.indexOf(ii.src)===-1&&ii.src.match(re)});
+		var old,src,ds,i=findFrame(function(f){
+			src=f.src;
+			if(!src&&(ds=f.dataset)){
+				if(/\blazyload\b/.test(f.className)&&ds.src){
+					old=ds.src.match(re);
+					if(old)ds.src=ds.src.replace(old[0],'https://api.'+old[1])
+				}if(/\blazyload(ed|ing)\b/.test(f.className))src=ds.src;
+			}
+			return old=src&&src.indexOf(actual)&&dry.indexOf(src)===-1&&src.match(re)
+		});
 		if (!i ||i.offsetWidth===0||old[0]==ignore) return;
-		dry.push(i.src);
+		dry.push(src);
 		var f=function(){
-			var url = i.src.replace(old[0], actual);
+			var url = src.replace(old[0], actual);
 			get(url, function(r){
 				if(ral===1)return;
 				var up=update(i,r);
@@ -42,7 +51,7 @@
 		if ((ios&&'https:'==location.protocol)
 			||(!MS&&(navigator.serviceWorker||(!ios&&'http:'==location.protocol)))) {
 			head(last + '/ping/').then(function () {
-				i.src = i.src.replace(old[0], last);
+				i.src = src.replace(old[0], last);
 				dry = [];
 				ignore=last;
 			}).catch(f);
@@ -60,9 +69,10 @@
 	}
 	function copyAttr(from,to){
 		var attrs=from.attributes;
-		for(var i=0;i<attrs.length;i++){
-			if(attrs[i].name!=='src'&&/^[\w\-]+$/.test(attrs[i].name))
-				to.setAttribute(attrs[i].name,attrs[i].value);
+		for(var name,i=0;i<attrs.length;i++){
+			name = attrs[i].name;
+			if(name!='src'&&name!='data-src'&&/^[\w\-]+$/.test(name))
+				to.setAttribute(name,attrs[i].value);
 		}
 	}
 	function get(url, cb) {
