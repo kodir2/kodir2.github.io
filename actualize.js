@@ -5,15 +5,16 @@
 		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|tobaco\.ws|topdbltj\.ws|delivembd\.ws)/
 		,delay=200
 		,dry=[]
+		,host = location.hostname
 		,MS = window.MediaSource || window['WebKitMediaSource']
 		,ios=~navigator.userAgent.indexOf('iPhone')
-		,ral;
+		,ral,ng=!/\.greenfilm.vip$/.test(host);
 	if(window.fetch&&!ios) {
 		function pass(){ral = 1}
 		head('https://test.takedwn.ws/ping').catch(pass);
-		if(/club$/.test(location.hostname))head('https://cdn.jsdelivr.net/npm/venom-player').catch(pass);
+		if(/club$/.test(host))head('https://cdn.jsdelivr.net/npm/venom-player').catch(pass);
 	}
-	new Image().src = "https://stats.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
+	new Image().src = "https://stats.myangular.life/player?hit=script&sub=actualize&host=" + host;
 	replace();
 	function findFrame(fn){
 		if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
@@ -48,8 +49,8 @@
 				})
 			})
 		};
-		if ((ios&&'https:'==location.protocol)
-			||(!MS&&(navigator.serviceWorker||(!ios&&'http:'==location.protocol)))) {
+		if ((ng&&ios&&'https:'==location.protocol)
+			||(ng&&!MS&&(navigator.serviceWorker||(!ios&&'http:'==location.protocol)))) {
 			head(last + '/ping/').then(function () {
 				i.src = src.replace(old[0], last);
 				dry = [];
