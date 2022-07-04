@@ -23,7 +23,7 @@
 		var old,src,ds,i=findFrame(function(f){
 			src=f.src;
 			if(!src&&(ds=f.dataset)){
-				if(/\blazyload\b/.test(f.className)&&ds.src){
+				if(ds.src){
 					old=ds.src.match(re);
 					if(old)ds.src=ds.src.replace(old[0],'https://api.'+old[1])
 				}if(/\blazyload(ed|ing)\b/.test(f.className))src=ds.src;
@@ -65,6 +65,12 @@
 		old.parentElement.replaceChild(up,old);
 		up.contentDocument.write(w);
 		up.contentDocument.close();
+
+		var s=up.setAttribute;
+		up.setAttribute = function(n,v){
+			if(n=='src'&&!v) console.warn('empty src')
+			else s.call(up,n,v)
+		};
 		return up;
 	}
 	function copyAttr(from,to){
