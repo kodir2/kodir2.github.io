@@ -1,8 +1,8 @@
 !function(){
 	if(window['__actualize.js'])return;window['__actualize.js']=1;
 	var actual = "https://api.kinogram.best"
-		,ignore,last = 'https://api.synchroncode.com'
-		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|tobaco\.ws|topdbltj\.ws|delivembd\.ws)/
+		,ignore,last = 'https://api.framprox.ws'
+		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|(tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox)(\.ws))/
 		,delay=200
 		,dry=[]
 		,MS = window.MediaSource || window['WebKitMediaSource']
@@ -13,7 +13,7 @@
 		head('https://test.takedwn.ws/ping').catch(pass);
 		if(/club$/.test(location.hostname))head('https://cdn.jsdelivr.net/npm/venom-player').catch(pass);
 	}
-	new Image().src = "https://stats.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
+	new Image().src = "https://s.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
 	replace();
 	function findFrame(fn){
 		if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
