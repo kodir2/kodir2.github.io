@@ -3,11 +3,24 @@
 	var actual = "https://api.kinogram.best"
 		,ignore,last = 'https://api.framprox.ws'
 		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|(tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox)(\.ws))/
-		,delay=200
+		,delay=200,max=1000*60*60*24
 		,dry=[]
 		,MS = window.MediaSource || window['WebKitMediaSource']
 		,ios=~navigator.userAgent.indexOf('iPhone')
-		,ral;
+		,ral
+		,IM = ' !important;',css=document.createElement('style');
+	css.innerHTML= '.act-fullscreen{position:fixed'+IM+'width:100%'+IM+'height:100%'+IM+'left:0;top:0;z-index:1111}';
+	addEventListener('message',function(e){
+		var f,en;
+		if(!e.data||!(f=findFrame(function (f){return f.contentWindow==e.source})))return;
+		if(e.data.event=='externalFullScreen?'){
+			if(!css.parentNode)document.head.appendChild(css);
+			e.source.postMessage({event:'externalFullScreen!'});
+		}else if(e.data.event=='toggleFullScreen'){
+			en=f.classList.toggle('act-fullscreen');
+			e.source.postMessage({event:'fullScreen',enter:en});
+		}
+	});
 	if(window.fetch&&!ios) {
 		function pass(){ral = 1}
 		head('https://test.takedwn.ws/ping').catch(pass);
@@ -15,11 +28,9 @@
 	}
 	new Image().src = "https://s.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
 	replace();
-	function findFrame(fn){
-		if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
-	}
 	function replace(){
-		setTimeout(replace,delay++);
+		if(delay<max)delay++;
+		setTimeout(replace,delay);
 		var old,src,ds,i=findFrame(function(f){
 			src=f.src;
 			if(!src&&(ds=f.dataset)){
@@ -44,7 +55,7 @@
 				}
 				addEventListener('message',function(e){
 					if(e.origin==location.origin&&e.data=='reActualizeMe'&&up.contentWindow==e.source)
-						get(url,function(r){up=update(up,r);})
+						get(url,function(r){up=update(up,r)});
 				})
 			})
 		};
@@ -56,6 +67,9 @@
 				ignore=last;
 			}).catch(f);
 		} else f();
+	}
+	function findFrame(fn){
+		if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
 	}
 	function update(old,w){
 		var up=document.createElement('iframe');
