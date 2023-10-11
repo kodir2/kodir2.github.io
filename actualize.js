@@ -1,11 +1,9 @@
 !function(){
 	if(window['__actualize.js'])return;window['__actualize.js']=1;
 	var actual = "https://api.kinogram.best"
-		,ignore,last = 'https://api.framprox.ws'
 		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|(tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox)(\.ws))/
 		,delay=200,max=1000*60*60*24
 		,dry=[]
-		,MS = window.MediaSource || window['WebKitMediaSource']
 		,ios=~navigator.userAgent.indexOf('iPhone')
 		,ral
 		,IM = ' !important;',css=document.createElement('style');
@@ -41,32 +39,22 @@
 			}
 			return old=src&&src.indexOf(actual)&&dry.indexOf(src)===-1&&src.match(re)
 		});
-		if (!i ||i.offsetWidth===0||old[0]==ignore) return;
+		if (!i ||i.offsetWidth===0) return;
 		dry.push(src);
-		var f=function(){
-			var url = src.replace(old[0], actual);
-			get(url, function(r){
-				if(ral===1)return;
-				var up=update(i,r);
-				dry=[];
-				if(window.URL){
-					url=new URL(url);
-					url.searchParams.delete('episode');
-				}
-				addEventListener('message',function(e){
-					if(e.origin==location.origin&&e.data=='reActualizeMe'&&up.contentWindow==e.source)
-						get(url,function(r){up=update(up,r)});
-				})
+		var url = src.replace(old[0], actual);
+		get(url, function(r){
+			if(ral===1)return;
+			var up=update(i,r);
+			dry=[];
+			if(window.URL){
+				url=new URL(url);
+				url.searchParams.delete('episode');
+			}
+			addEventListener('message',function(e){
+				if(e.origin==location.origin&&e.data=='reActualizeMe'&&up.contentWindow==e.source)
+					 get(url,function(r){up=update(up,r)});
 			})
-		};
-		if ((ios&&'https:'==location.protocol)
-			||(!MS&&(navigator.serviceWorker||(!ios&&'http:'==location.protocol)))) {
-			head(last + '/ping/').then(function () {
-				i.src = src.replace(old[0], last);
-				dry = [];
-				ignore=last;
-			}).catch(f);
-		} else f();
+		});
 	}
 	function findFrame(fn){
 		if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
