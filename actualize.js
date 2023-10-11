@@ -72,10 +72,12 @@
 		if(document.body)return Array.prototype.find.call(document.body.getElementsByTagName('iframe'),fn);
 	}
 	function update(old,w){
-		var up=document.createElement('iframe');
+		var up = document.createElement('iframe'),
+			allow = 'autoplay *; fullscreen';
+		if (ios || /mac os/i.test(navigator.userAgent)) allow += ' *';
 		copyAttr(old,up);
-		up.setAttribute('allow', 'autoplay *; fullscreen');
-		up.allow = 'autoplay *; fullscreen';
+		up.setAttribute('allow', allow);
+		up.allow = allow;
 		old.parentElement.replaceChild(up,old);
 		up.contentDocument.write(w);
 		up.contentDocument.close();
