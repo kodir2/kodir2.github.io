@@ -1,7 +1,7 @@
 !function(){
 	if(window['__actualize.js'])return;window['__actualize.js']=1;
 	var actual = "https://api.kinogram.best"
-		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|(tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox)(\.ws))/
+		,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|(tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox|embprox|bedemp2|embr|lessornot|linktodo|insertunit|marts|ninsel|embess|luxembd|domem)(\.ws))/
 		,delay=200,max=1000*60*60*24
 		,dry=[]
 		,ios=~navigator.userAgent.indexOf('iPhone')
