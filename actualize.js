@@ -24,7 +24,7 @@ if(window.fetch&&!ios) {
 	head('https://test.showvid.ws/ping').catch(pass);
 	if(/club$/.test(location.hostname))head('https://cdn.jsdelivr.net/npm/venom-player').catch(pass);
 }
-new Image().src = "https://s.myangular.life/player?hit=script&sub=actualize&host=" + location.hostname;
+s('script','actualize');
 replace();
 function replace(){
 	if(delay<max)delay++;
@@ -85,14 +85,24 @@ function copyAttr(from,to){
 			to.setAttribute(name,attrs[i].value);
 	}
 }
+function s(hit, sub, e) {
+	new Image().src = "https://s.myangular.life/player?cat=actual&hit=" + hit +
+		"&sub=" + sub + (e || '') +
+		"&host=" + location.hostname + "&v=25-11-26-01";
+}
 function get(url, cb) {
-	var xhr = new XMLHttpRequest;
-	xhr.withCredentials = true;
-	xhr.open('GET', url);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4 && xhr.status === 200) cb(xhr.response);
+	var r = new XMLHttpRequest, start = new Date;
+	r.withCredentials = true;
+	// r.timeout = 1e4;
+	r.open('GET', url);
+	r.onreadystatechange = function() {
+		if (r.readyState === 4 && r.status === 200) {
+			s('load','ok','&time='+(new Date - start))
+			cb(r.response);
+		}
 	};
-	xhr.send();
+	r.onerror=function(){s('load','err','&time='+(new Date - start))};
+	r.send();
 }
 function head(u){return fetch(u,{method:'head'})}
 }()
