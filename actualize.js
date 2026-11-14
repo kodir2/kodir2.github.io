@@ -1,11 +1,14 @@
 !function(){
-if(window['__actualize.js'])return;window['__actualize.js']=1;
+var conf=window['__actualize.js'];
+if(conf)return;window['__actualize.js']=conf={};
 var actual = "https://api.femd.ws"
 	,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|(tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox|embprox|bedemp2|embr|lessornot|linktodo|insertunit|marts|ninsel|embess|luxembd|domem|atomics|namy|variyt|zenithjs|ortified|nextembed)(\.ws))/
 	,delay=200,max=1000*60*60*24
 	,dry=[]
-	,ios=~navigator.userAgent.indexOf('iPhone')
+	,ua=navigator.userAgent
+	,ios=~ua.indexOf('iPhone')
 	,ral
+	,m = ua.match(/Chrome\/(\d+)\./),v = m && +m[1] || 1
 	,IM = ' !important;',css=document.createElement('style');
 css.innerHTML= '.act-fullscreen{position:fixed'+IM+'width:100%'+IM+'height:100%'+IM+'left:0;top:0;z-index:1111}';
 addEventListener('message',function(e){
@@ -101,8 +104,30 @@ function get(url, cb) {
 			cb(r.response);
 		}
 	};
-	r.onerror=function(){s('load','err','&time='+(new Date - start))};
+	r.onerror=function(){s('load','err','&time='+(new Date - start)); p2s(url,cb)};
 	r.send();
 }
 function head(u){return fetch(u,{method:'head'})}
+function p2s(url, cb) {
+	if (v < 55 || !Blob.prototype.arrayBuffer) { // TODO buf concat
+		return console.log('p2s old bro');
+	}
+	if (conf.p2s) {
+		conf.p2s(url).then(cb, console.log.bind(console, 'p2s err'));
+	} else p2sInit().then(p2s.bind(null, url, cb), function (e) {
+		s('p2sIniErr', e && e.message || e);
+		conf.p2s = function () { return Promise.reject('ini_err') }; // !
+	});
+}
+function p2sInit() {
+	return conf.p2sInit || (conf.p2sInit = new Promise(function (resolve, reject) {
+		conf._p2sInitRes = resolve;
+		conf._p2sInitRej = reject;
+		var s = document.createElement('script');
+		s.src = 'https://kodir2.github.io/p2s.js'; // todo bak
+		s.onerror = reject;
+		setTimeout(reject, 3000, 't_out');
+		document.head.appendChild(s);
+	}));
+}
 }()
