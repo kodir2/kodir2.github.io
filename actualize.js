@@ -2,7 +2,7 @@
 var conf=window['__actualize.js'];
 if(conf)return;window['__actualize.js']=conf={};
 var actual = "https://api.femd.ws"
-	,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.(delivembed\.cc|buildplayer\.com|embedstorage\.net|mir-dikogo-zapada\.com|multikland\.net|placehere\.link|synchroncode\.com|ameytools\.club|(tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox|embprox|bedemp2|embr|lessornot|linktodo|insertunit|marts|ninsel|embess|luxembd|domem|atomics|namy|variyt|zenithjs|ortified|nextembed)(\.ws))/
+	,re=/^(?:https?:)?\/\/(?:mm|app?i\w*)\.((?:embedstorage|embf|multikland)\.net|(?:buildplayer|mir-dikogo-zapada|synchroncode)\.com|delivembed\.cc|placehere\.link|ameytools\.club|(?:tobaco|topdbltj|delivembd|hostemb|loadbox|getcodes|strvid|ebder|framprox|embprox|bedemp2|embr|lessornot|linktodo|insertunit|marts|ninsel|embess|luxembd|domem|atomics|namy|variyt|zenithjs|ortified|nextembed)\.ws)/
 	,delay=200,max=1000*60*60*24
 	,dry=[]
 	,ua=navigator.userAgent
